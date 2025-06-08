@@ -1,19 +1,143 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Bates(x As Double, n As Long) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 de Bates' Llama a la distribuci髇 de Irwin-Hall y 閟ta a su vez'   Llama a la funci髇 auxiliar Mi_Factorial'   Llama a la funci髇 auxiliar D_I_H'   Llama a la funci髇 D_Normal_MS y 閟ta a D_Normal_01' Cuando n>=25 utiliza la aproximaci髇 en el intervalo [0,n]'D_Bates = D_Irwin_Hall(n * x, n)If IsNumeric(D_Bates) Then   D_Bates = n * D_BatesEnd IfEnd Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Bates(x As Double, n As Long) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 de Bates' Llama a la distribuci髇 de Irwin-Hall y 閟ta a su vez'   Llama a la funci髇 auxiliar Mi_Factorial'   Llama a la funci髇 auxiliar D_I_H'   Llama a la funci髇 FD_Normal_MS y 閟ta a FD_Normal_01_G y FD_Normal_01_H' Cuando n>=25 utiliza la aproximaci髇 normal en el intervalo [0,n]'FD_Bates = FD_Irwin_Hall(n * x, n)End Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Bates_Inv(Probabilidad As Double, n As Long) As Variant' Esta funci髇 calcula la inversa de la funci髇 de distribuci髇 de la distribuci髇 de Bates' Llama a la distribuci髇 de Irwin-Hall y 閟ta a su vez'   Llama a la funci髇 Mi_ecuacion_EstF_Bates_Inv = F_Irwin_Hall_Inv(Probabilidad, n)If IsNumeric(F_Bates_Inv) Then   F_Bates_Inv = F_Bates_Inv / nEnd IfEnd Function
-' FUNCI覰 F_Bates_Media
-Public Function F_Bates_Media(n As Long) As Variant' Calcula la media de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_Media = "n debe ser >0"   Exit FunctionEnd IfF_Bates_Media = 0.5End Function
-' FUNCI覰 F_Bates_Moda
-Public Function F_Bates_Moda(n As Long) As Variant' Calcula la moda de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_Moda = "n debe ser >0"   Exit FunctionEnd IfIf n = 1 Then   F_Bates_Moda = "Cualquier valor entre 0 y 1"Else   F_Bates_Moda = 0.5End IfEnd Function
-' FUNCI覰 F_Bates_Mediana
-Public Function F_Bates_Mediana(n As Long) As Variant' Calcula la mediana de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_Mediana = "n debe ser >0"   Exit FunctionEnd IfF_Bates_Mediana = 0.5End Function
-' FUNCI覰 F_Bates_DesvTip
-Public Function F_Bates_DesvTip(n As Long) As Variant' Calcula la desviaci髇 t韕ica de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_DesvTip = "n debe ser >0"   Exit FunctionEnd IfF_Bates_DesvTip = Sqr(1 / 12 / n)End Function
-' FUNCI覰 F_Bates_Asimetria
-Public Function F_Bates_Asimetria(n As Long) As Variant' Calcula el coeficiente de asimetr韆 (Fisher) de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_Asimetria = "n debe ser >0"   Exit FunctionEnd IfF_Bates_Asimetria = 0End Function
-' FUNCI覰 F_Bates_Curtosis
-Public Function F_Bates_Curtosis(n As Long) As Variant' Calcula la curtosis de la distribuci髇 de BatesIf n <= 0 Then   F_Bates_Curtosis = "n debe ser >0"   Exit FunctionEnd IfF_Bates_Curtosis = 3 - 6 / 5 / nEnd Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Bates(x As Double, n As Long) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n de Bates
+' Llama a la distribuci贸n de Irwin-Hall y 茅sta a su vez
+'   Llama a la funci贸n auxiliar Mi_Factorial
+'   Llama a la funci贸n auxiliar D_I_H
+'   Llama a la funci贸n D_Normal_MS y 茅sta a D_Normal_01
+' Cuando n>=25 utiliza la aproximaci贸n en el intervalo [0,n]
+'
+D_Bates = D_Irwin_Hall(n * x, n)
+
+If IsNumeric(D_Bates) Then
+   D_Bates = n * D_Bates
+End If
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Bates(x As Double, n As Long) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n de Bates
+' Llama a la distribuci贸n de Irwin-Hall y 茅sta a su vez
+'   Llama a la funci贸n auxiliar Mi_Factorial
+'   Llama a la funci贸n auxiliar D_I_H
+'   Llama a la funci贸n FD_Normal_MS y 茅sta a FD_Normal_01_G y FD_Normal_01_H
+' Cuando n>=25 utiliza la aproximaci贸n normal en el intervalo [0,n]
+'
+FD_Bates = FD_Irwin_Hall(n * x, n)
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Bates_Inv(Probabilidad As Double, n As Long) As Variant
+' Esta funci贸n calcula la inversa de la funci贸n de distribuci贸n de la distribuci贸n de Bates
+' Llama a la distribuci贸n de Irwin-Hall y 茅sta a su vez
+'   Llama a la funci贸n Mi_ecuacion_Est
+
+F_Bates_Inv = F_Irwin_Hall_Inv(Probabilidad, n)
+
+If IsNumeric(F_Bates_Inv) Then
+   F_Bates_Inv = F_Bates_Inv / n
+End If
+
+End Function
+
+
+' FUNCI脫N F_Bates_Media
+
+Public Function F_Bates_Media(n As Long) As Variant
+' Calcula la media de la distribuci贸n de Bates
+
+If n <= 0 Then
+   F_Bates_Media = "n debe ser >0"
+   Exit Function
+End If
+
+F_Bates_Media = 0.5
+
+End Function
+
+
+' FUNCI脫N F_Bates_Moda
+
+Public Function F_Bates_Moda(n As Long) As Variant
+' Calcula la moda de la distribuci贸n de Bates
+If n <= 0 Then
+   F_Bates_Moda = "n debe ser >0"
+   Exit Function
+End If
+
+If n = 1 Then
+   F_Bates_Moda = "Cualquier valor entre 0 y 1"
+Else
+   F_Bates_Moda = 0.5
+End If
+
+End Function
+
+
+' FUNCI脫N F_Bates_Mediana
+
+Public Function F_Bates_Mediana(n As Long) As Variant
+' Calcula la mediana de la distribuci贸n de Bates
+If n <= 0 Then
+   F_Bates_Mediana = "n debe ser >0"
+   Exit Function
+End If
+
+F_Bates_Mediana = 0.5
+
+End Function
+
+
+' FUNCI脫N F_Bates_DesvTip
+
+Public Function F_Bates_DesvTip(n As Long) As Variant
+' Calcula la desviaci贸n t铆pica de la distribuci贸n de Bates
+
+If n <= 0 Then
+   F_Bates_DesvTip = "n debe ser >0"
+   Exit Function
+End If
+
+F_Bates_DesvTip = Sqr(1 / 12 / n)
+
+End Function
+
+
+' FUNCI脫N F_Bates_Asimetria
+
+Public Function F_Bates_Asimetria(n As Long) As Variant
+' Calcula el coeficiente de asimetr铆a (Fisher) de la distribuci贸n de Bates
+
+If n <= 0 Then
+   F_Bates_Asimetria = "n debe ser >0"
+   Exit Function
+End If
+
+F_Bates_Asimetria = 0
+
+End Function
+
+
+' FUNCI脫N F_Bates_Curtosis
+
+Public Function F_Bates_Curtosis(n As Long) As Variant
+' Calcula la curtosis de la distribuci贸n de Bates
+
+If n <= 0 Then
+   F_Bates_Curtosis = "n debe ser >0"
+   Exit Function
+End If
+
+F_Bates_Curtosis = 3 - 6 / 5 / n
+
+End Function
+
+
