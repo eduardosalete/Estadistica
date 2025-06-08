@@ -1,7 +1,76 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Exponencial(x As Double, Lambda As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 Exponencial' Devuelve 0 para x<0If Lambda <= 0 Then   D_Exponencial = "Lambda debe ser >0"   Exit FunctionEnd IfIf x < 0 Then   D_Exponencial = 0   Exit FunctionEnd IfD_Exponencial = Lambda * Exp(-Lambda * x)End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Exponencial(x As Double, Lambda As Double) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 Exponencial' Devuelve 0 para x<=0If Lambda <= 0 Then   FD_Exponencial = "Lambda debe ser >0"   Exit FunctionEnd IfIf x <= 0 Then   FD_Exponencial = 0   Exit FunctionEnd IfFD_Exponencial = 1 - Exp(-Lambda * x)End Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Exponencial_Inv(Probabilidad As Double, Lambda As Double) As Variant' Esta funci髇 obtiene la inversa de la funci髇 de distribuci髇 ExponencialDim Eps As DoubleEps = 0.0000001If Probabilidad < 0 Or Probabilidad > 1 Then   F_Exponencial_Inv = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfIf Lambda <= 0 Then   F_Exponencial_Inv = "Lambda debe ser >0"   Exit FunctionEnd IfIf Probabilidad <= Eps Then   F_Exponencial_Inv = 0   Exit FunctionEnd IfIf Probabilidad >= 1 - Eps Then   F_Exponencial_Inv = ChrW(8734)   Exit FunctionEnd IfF_Exponencial_Inv = -Log(1 - Probabilidad) / LambdaEnd Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Exponencial(x As Double, Lambda As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n Exponencial
+' Devuelve 0 para x<0
+
+If Lambda <= 0 Then
+   D_Exponencial = "Lambda debe ser >0"
+   Exit Function
+End If
+
+If x < 0 Then
+   D_Exponencial = 0
+   Exit Function
+End If
+
+D_Exponencial = Lambda * Exp(-Lambda * x)
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Exponencial(x As Double, Lambda As Double) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n Exponencial
+' Devuelve 0 para x<=0
+
+If Lambda <= 0 Then
+   FD_Exponencial = "Lambda debe ser >0"
+   Exit Function
+End If
+
+If x <= 0 Then
+   FD_Exponencial = 0
+   Exit Function
+End If
+
+FD_Exponencial = 1 - Exp(-Lambda * x)
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Exponencial_Inv(Probabilidad As Double, Lambda As Double) As Variant
+' Esta funci贸n obtiene la inversa de la funci贸n de distribuci贸n Exponencial
+Dim Eps As Double
+
+Eps = 0.0000001
+
+If Probabilidad < 0 Or Probabilidad > 1 Then
+   F_Exponencial_Inv = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+If Lambda <= 0 Then
+   F_Exponencial_Inv = "Lambda debe ser >0"
+   Exit Function
+End If
+
+If Probabilidad <= Eps Then
+   F_Exponencial_Inv = 0
+   Exit Function
+End If
+
+If Probabilidad >= 1 - Eps Then
+   F_Exponencial_Inv = ChrW(8734)
+   Exit Function
+End If
+
+F_Exponencial_Inv = -Log(1 - Probabilidad) / Lambda
+
+End Function
+
+
