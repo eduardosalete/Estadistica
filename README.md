@@ -8,6 +8,7 @@ Se permite su uso, modificación y redistribución, incluso con fines comerciale
 
 - Eduardo Salete Casino
 - Eduardo Salete Díaz
-- Enrique Salete Díaz
+- Diego Salete Díaz
+- Eduardo Conde López
 
 Ver el archivo [LICENSE](./LICENSE) para más detalles.
