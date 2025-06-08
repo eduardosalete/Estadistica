@@ -1,17 +1,157 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Rayleigh(x As Double, Sigma As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 de RayleighDim Eps As Double, s2 As DoubleEps = 0.0000001If Sigma <= Eps Then   D_Rayleigh = "Sigma debe ser > 0"   Exit FunctionEnd IfIf x < 0 Then   D_Rayleigh = 0   Exit FunctionEnd Ifs2 = Sigma * SigmaD_Rayleigh = x / s2 * Exp(-x * x / 2 / s2)End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Rayleigh(x As Double, Sigma As Double) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 de RayleighDim Eps As Double, s2 As DoubleEps = 0.0000001If Sigma <= Eps Then   FD_Rayleigh = "Sigma debe ser > 0"   Exit FunctionEnd IfIf x < 0 Then   FD_Rayleigh = 0   Exit FunctionEnd Ifs2 = Sigma * SigmaFD_Rayleigh = 1 - Exp(-x * x / 2 / s2)End Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Rayleigh_Inv(Probabilidad As Double, Sigma As Double) As Variant' Esta funci髇 obtiene la inversa de la funci髇 de distribuci髇 de RayleighDim Eps As DoubleEps = 0.0000001If Sigma <= Eps Then   F_Rayleigh_Inv = "Sigma debe ser > 0"   Exit FunctionEnd IfIf Probabilidad < 0 Or Probabilidad > 1 Then   F_Rayleigh_Inv = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfIf Abs(Probabilidad - 1) < Eps Then   F_Rayleigh_Inv = ChrW(8734)   Exit FunctionEnd IfF_Rayleigh_Inv = Sigma * Sqr(-2 * Log(1 - Probabilidad))End Function
-' FUNCI覰 F_Rayleigh_Media
-Public Function F_Rayleigh_Media(Sigma As Double) As Variant' Calcula la media de la distribuci髇 de RayleighDim Pi As DoublePi = 3.14159265358979If Sigma <= 0 Then   F_Rayleigh_Media = "Sigma debe ser > 0"   Exit FunctionEnd IfF_Rayleigh_Media = Sigma * Sqr(Pi / 2)End Function
-' FUNCI覰 F_Rayleigh_Moda
-Public Function F_Rayleigh_Moda(Sigma As Double) As Variant' Calcula la moda de la distribuci髇 de RayleighIf Sigma <= 0 Then   F_Rayleigh_Moda = "Sigma debe ser > 0"   Exit FunctionEnd IfF_Rayleigh_Moda = SigmaEnd Function
-' FUNCI覰 F_Rayleigh_DesvTip
-Public Function F_Rayleigh_DesvTip(Sigma As Double) As Variant' Calcula la desviaci髇 t韕ica de la distribuci髇 de RayleighDim Pi As DoublePi = 3.14159265358979If Sigma <= 0 Then   F_Rayleigh_DesvTip = "Sigma debe ser > 0"   Exit FunctionEnd IfF_Rayleigh_DesvTip = Sigma * Sqr((4 - Pi) / 2)End Function
-' FUNCI覰 F_Rayleigh_Asimetria
-Public Function F_Rayleigh_Asimetria(Sigma As Double) As Variant' Calcula coeficiente de asimetr韆 (Fisher) de la distribuci髇 de RayleighDim Pi As DoublePi = 3.14159265358979If Sigma <= 0 Then   F_Rayleigh_Asimetria = "Sigma debe ser > 0"   Exit FunctionEnd IfF_Rayleigh_Asimetria = 2 * Sqr(Pi) * (Pi - 3) / Sqr((4 - Pi) ^ 3)End Function
-' FUNCI覰 F_Rayleigh_Curtosis
-Public Function F_Rayleigh_Curtosis(Sigma As Double) As Variant' Calcula la curtosis de la distribuci髇 de RayleighDim Pi As DoublePi = 3.14159265358979If Sigma <= 0 Then   F_Rayleigh_Curtosis = "Sigma debe ser > 0"   Exit FunctionEnd IfF_Rayleigh_Curtosis = 3 - (6 * Pi * Pi - 24 * Pi + 16) / (4 - Pi) ^ 2End Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Rayleigh(x As Double, Sigma As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n de Rayleigh
+Dim Eps As Double, s2 As Double
+
+Eps = 0.0000001
+If Sigma <= Eps Then
+   D_Rayleigh = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+If x < 0 Then
+   D_Rayleigh = 0
+   Exit Function
+End If
+
+s2 = Sigma * Sigma
+D_Rayleigh = x / s2 * Exp(-x * x / 2 / s2)
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Rayleigh(x As Double, Sigma As Double) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n de Rayleigh
+Dim Eps As Double, s2 As Double
+
+Eps = 0.0000001
+If Sigma <= Eps Then
+   FD_Rayleigh = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+If x < 0 Then
+   FD_Rayleigh = 0
+   Exit Function
+End If
+
+s2 = Sigma * Sigma
+FD_Rayleigh = 1 - Exp(-x * x / 2 / s2)
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Rayleigh_Inv(Probabilidad As Double, Sigma As Double) As Variant
+' Esta funci贸n obtiene la inversa de la funci贸n de distribuci贸n de Rayleigh
+Dim Eps As Double
+
+Eps = 0.0000001
+If Sigma <= Eps Then
+   F_Rayleigh_Inv = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+If Probabilidad < 0 Or Probabilidad > 1 Then
+   F_Rayleigh_Inv = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+If Abs(Probabilidad - 1) < Eps Then
+   F_Rayleigh_Inv = ChrW(8734)
+   Exit Function
+End If
+
+F_Rayleigh_Inv = Sigma * Sqr(-2 * Log(1 - Probabilidad))
+
+End Function
+
+
+' FUNCI脫N F_Rayleigh_Media
+
+Public Function F_Rayleigh_Media(Sigma As Double) As Variant
+' Calcula la media de la distribuci贸n de Rayleigh
+Dim Pi As Double
+
+Pi = 3.14159265358979
+If Sigma <= 0 Then
+   F_Rayleigh_Media = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+F_Rayleigh_Media = Sigma * Sqr(Pi / 2)
+
+End Function
+
+
+' FUNCI脫N F_Rayleigh_Moda
+
+Public Function F_Rayleigh_Moda(Sigma As Double) As Variant
+' Calcula la moda de la distribuci贸n de Rayleigh
+
+If Sigma <= 0 Then
+   F_Rayleigh_Moda = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+F_Rayleigh_Moda = Sigma
+
+End Function
+
+
+' FUNCI脫N F_Rayleigh_DesvTip
+
+Public Function F_Rayleigh_DesvTip(Sigma As Double) As Variant
+' Calcula la desviaci贸n t铆pica de la distribuci贸n de Rayleigh
+Dim Pi As Double
+
+Pi = 3.14159265358979
+If Sigma <= 0 Then
+   F_Rayleigh_DesvTip = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+F_Rayleigh_DesvTip = Sigma * Sqr((4 - Pi) / 2)
+
+End Function
+
+
+' FUNCI脫N F_Rayleigh_Asimetria
+
+Public Function F_Rayleigh_Asimetria(Sigma As Double) As Variant
+' Calcula coeficiente de asimetr铆a (Fisher) de la distribuci贸n de Rayleigh
+Dim Pi As Double
+
+Pi = 3.14159265358979
+If Sigma <= 0 Then
+   F_Rayleigh_Asimetria = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+F_Rayleigh_Asimetria = 2 * Sqr(Pi) * (Pi - 3) / Sqr((4 - Pi) ^ 3)
+
+End Function
+
+
+' FUNCI脫N F_Rayleigh_Curtosis
+
+Public Function F_Rayleigh_Curtosis(Sigma As Double) As Variant
+' Calcula la curtosis de la distribuci贸n de Rayleigh
+Dim Pi As Double
+
+Pi = 3.14159265358979
+If Sigma <= 0 Then
+   F_Rayleigh_Curtosis = "Sigma debe ser > 0"
+   Exit Function
+End If
+
+F_Rayleigh_Curtosis = 3 - (6 * Pi * Pi - 24 * Pi + 16) / (4 - Pi) ^ 2
+
+End Function
+
+
