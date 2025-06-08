@@ -1,7 +1,76 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Gumbel_A(x As Double, Mu As Double, Beta As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 alternativa de GumbelDim z As DoubleIf Beta <= 0 Then   D_Gumbel_A = "Beta debe ser >0"   Exit FunctionEnd Ifz = (x - Mu) / BetaD_Gumbel_A = 1 / Beta * Exp(z - Exp(z))End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Gumbel_A(x As Double, Mu As Double, Beta As Double) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 alternativa de GumbelDim z As DoubleIf Beta <= 0 Then   FD_Gumbel_A = "Beta debe ser >0"   Exit FunctionEnd Ifz = (x - Mu) / BetaFD_Gumbel_A = 1 - Exp(-Exp(z))End Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Gumbel_A_Inv(Probabilidad As Double, Mu As Double, Beta As Double) As Variant' Esta funci髇 calcula la inversa de la funci髇 de distribuci髇 de la distribuci髇 alternativa de GumbelDim z As DoubleDim Eps As DoubleEps = 0.0000001If Beta <= 0 Then   F_Gumbel_A_Inv = "Beta debe ser >0"   Exit FunctionEnd IfIf Probabilidad < 0 Then   F_Gumbel_A_Inv = "Probabilidad negativa"   Exit FunctionEnd IfIf Probabilidad > 1 Then   F_Gumbel_A_Inv = "Probabilidad > 1"   Exit FunctionEnd IfIf Probabilidad < Eps Then   F_Gumbel_A_Inv = "+" & ChrW(8734)   Exit FunctionEnd IfIf Probabilidad >= 1 - Eps Then   F_Gumbel_A_Inv = "-" & ChrW(8734)   Exit FunctionEnd Ifz = Log(-Log(1 - Probabilidad))F_Gumbel_A_Inv = Beta * z + MuEnd Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Gumbel_A(x As Double, Mu As Double, Beta As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n alternativa de Gumbel
+Dim z As Double
+
+If Beta <= 0 Then
+   D_Gumbel_A = "Beta debe ser >0"
+   Exit Function
+End If
+
+z = (x - Mu) / Beta
+D_Gumbel_A = 1 / Beta * Exp(z - Exp(z))
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Gumbel_A(x As Double, Mu As Double, Beta As Double) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n alternativa de Gumbel
+Dim z As Double
+
+If Beta <= 0 Then
+   FD_Gumbel_A = "Beta debe ser >0"
+   Exit Function
+End If
+
+z = (x - Mu) / Beta
+FD_Gumbel_A = 1 - Exp(-Exp(z))
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Gumbel_A_Inv(Probabilidad As Double, Mu As Double, Beta As Double) As Variant
+' Esta funci贸n calcula la inversa de la funci贸n de distribuci贸n de la distribuci贸n alternativa de Gumbel
+Dim z As Double
+Dim Eps As Double
+
+Eps = 0.0000001
+
+If Beta <= 0 Then
+   F_Gumbel_A_Inv = "Beta debe ser >0"
+   Exit Function
+End If
+
+If Probabilidad < 0 Then
+   F_Gumbel_A_Inv = "Probabilidad negativa"
+   Exit Function
+End If
+
+If Probabilidad > 1 Then
+   F_Gumbel_A_Inv = "Probabilidad > 1"
+   Exit Function
+End If
+
+If Probabilidad < Eps Then
+   F_Gumbel_A_Inv = "+" & ChrW(8734)
+   Exit Function
+End If
+
+If Probabilidad >= 1 - Eps Then
+   F_Gumbel_A_Inv = "-" & ChrW(8734)
+   Exit Function
+End If
+
+z = Log(-Log(1 - Probabilidad))
+
+F_Gumbel_A_Inv = Beta * z + Mu
+
+End Function
+
+
