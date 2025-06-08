@@ -1,7 +1,70 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Normal_MS(x As Double, Mu As Double, Sigma As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 N(Mu,Sigma)' Llama a la funci髇 D_Normal_01Dim y As DoubleIf Sigma <= 0 Then   D_Normal_MS = "Sigma debe ser >0"   Exit FunctionEnd Ify = (x - Mu) / SigmaD_Normal_MS = D_Normal_01(y) / SigmaEnd Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Normal_MS(x As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 N(Mu,Sigma)' Si Procedimiento=1 emplea la relaci髇 con la funci髇 Gamma Incompleta Inferior' Si Procedimiento=2 emplea la aproximaci髇 de Hastings' Llama a la funci髇 FD_Normal_01_G' Llama a la funci髇 FD_Normal_01_HDim y As DoubleIf Sigma <= 0 Then   FD_Normal_MS = "Sigma debe ser >0"   Exit FunctionEnd Ify = (x - Mu) / SigmaIf Abs(Procedimiento - 1) < 0.01 Then   FD_Normal_MS = FD_Normal_01_G(y)Else   FD_Normal_MS = FD_Normal_01_H(y)End IfEnd Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Normal_MS_Inv(Probabilidad As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant' Esta funci髇 obtiene la inversa de la funci髇 de distribuci髇 N(Mu,Sigma)' Si Procedimiento=1 emplea la relaci髇 con la funci髇 Gamma Incompleta Inferior' Si Procedimiento=2 emplea la aproximaci髇 de Hastings' Llama a la funci髇 F_Normal_01_InvIf Sigma <= 0 Then   F_Normal_MS_Inv = "Sigma debe ser >0"   Exit FunctionEnd IfIf Probabilidad < 0 Or Probabilidad > 1 Then   F_Normal_MS_Inv = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfF_Normal_MS_Inv = Sigma * F_Normal_01_Inv(Probabilidad, Procedimiento) + MuEnd Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Normal_MS(x As Double, Mu As Double, Sigma As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n N(Mu,Sigma)
+' Llama a la funci贸n D_Normal_01
+
+Dim y As Double
+
+If Sigma <= 0 Then
+   D_Normal_MS = "Sigma debe ser >0"
+   Exit Function
+End If
+
+y = (x - Mu) / Sigma
+D_Normal_MS = D_Normal_01(y) / Sigma
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Normal_MS(x As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n N(Mu,Sigma)
+' Si Procedimiento=1 emplea la relaci贸n con la funci贸n Gamma Incompleta Inferior
+' Si Procedimiento=2 emplea la aproximaci贸n de Hastings
+' Llama a la funci贸n FD_Normal_01_G
+' Llama a la funci贸n FD_Normal_01_H
+
+Dim y As Double
+
+If Sigma <= 0 Then
+   FD_Normal_MS = "Sigma debe ser >0"
+   Exit Function
+End If
+
+y = (x - Mu) / Sigma
+
+If Abs(Procedimiento - 1) < 0.01 Then
+   FD_Normal_MS = FD_Normal_01_G(y)
+Else
+   FD_Normal_MS = FD_Normal_01_H(y)
+End If
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Normal_MS_Inv(Probabilidad As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant
+' Esta funci贸n obtiene la inversa de la funci贸n de distribuci贸n N(Mu,Sigma)
+' Si Procedimiento=1 emplea la relaci贸n con la funci贸n Gamma Incompleta Inferior
+' Si Procedimiento=2 emplea la aproximaci贸n de Hastings
+' Llama a la funci贸n F_Normal_01_Inv
+
+If Sigma <= 0 Then
+   F_Normal_MS_Inv = "Sigma debe ser >0"
+   Exit Function
+End If
+
+If Probabilidad < 0 Or Probabilidad > 1 Then
+   F_Normal_MS_Inv = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+F_Normal_MS_Inv = Sigma * F_Normal_01_Inv(Probabilidad, Procedimiento) + Mu
+
+End Function
+
+
