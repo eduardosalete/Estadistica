@@ -1,7 +1,88 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_LogNormal(x As Double, Mu As Double, Sigma As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 LogNormal(Mu,Sigma)' Llama a la funci髇 D_Normal_MSDim y As DoubleIf Sigma <= 0 Then   D_LogNormal = "Sigma debe ser >0"   Exit FunctionEnd IfIf x <= 0 Then   ' Valor negativo   D_LogNormal = 0   Exit FunctionEnd Ify = Log(x)D_LogNormal = 1 / x * D_Normal_MS(y, Mu, Sigma)End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_LogNormal(x As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 LogNormal(Mu,Sigma)' Si Procedimiento=1 emplea la relaci髇 con la funci髇 Gamma Incompleta Inferior' Si Procedimiento=2 emplea la aproximaci髇 de Hastings' Llama a la funci髇 FD_Normal_MSDim y As DoubleIf Sigma <= 0 Then   FD_LogNormal = "Sigma debe ser >0"   Exit FunctionEnd IfIf x <= 0 Then   ' Valor negativo   FD_LogNormal = 0   Exit FunctionEnd Ify = Log(x)FD_LogNormal = FD_Normal_MS(y, Mu, Sigma, Procedimiento)End Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_LogNormal_Inv(Probabilidad As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant' Esta funci髇 obtiene la inversa de la funci髇 de distribuci髇 LogNormal(Mu,Sigma)' Si Procedimiento=1 emplea la relaci髇 con la funci髇 Gamma Incompleta Inferior' Si Procedimiento=2 emplea la aproximaci髇 de Hastings' Llama a la funci髇 F_Normal_MS_InvDim Eps As DoubleEps = 0.0000001If Sigma <= 0 Then   F_LogNormal_Inv = "Sigma debe ser >0"   Exit FunctionEnd IfIf Probabilidad < 0 Or Probabilidad > 1 Then   F_LogNormal_Inv = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfIf Probabilidad <= Eps Then   ' Valor negativo   F_LogNormal_Inv = 0   Exit FunctionEnd IfIf Abs(Probabilidad - 1) < Eps Then   F_LogNormal_Inv = ChrW(8734)   Exit FunctionEnd IfF_LogNormal_Inv = Exp(F_Normal_MS_Inv(Probabilidad, Mu, Sigma, Procedimiento))End Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_LogNormal(x As Double, Mu As Double, Sigma As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n LogNormal(Mu,Sigma)
+' Llama a la funci贸n D_Normal_MS
+Dim y As Double
+
+If Sigma <= 0 Then
+   D_LogNormal = "Sigma debe ser >0"
+   Exit Function
+End If
+
+If x <= 0 Then
+   ' Valor negativo
+   D_LogNormal = 0
+   Exit Function
+End If
+
+y = Log(x)
+D_LogNormal = 1 / x * D_Normal_MS(y, Mu, Sigma)
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_LogNormal(x As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n LogNormal(Mu,Sigma)
+' Si Procedimiento=1 emplea la relaci贸n con la funci贸n Gamma Incompleta Inferior
+' Si Procedimiento=2 emplea la aproximaci贸n de Hastings
+' Llama a la funci贸n FD_Normal_MS
+Dim y As Double
+
+If Sigma <= 0 Then
+   FD_LogNormal = "Sigma debe ser >0"
+   Exit Function
+End If
+
+If x <= 0 Then
+   ' Valor negativo
+   FD_LogNormal = 0
+   Exit Function
+End If
+
+y = Log(x)
+FD_LogNormal = FD_Normal_MS(y, Mu, Sigma, Procedimiento)
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_LogNormal_Inv(Probabilidad As Double, Mu As Double, Sigma As Double, Optional Procedimiento As Double = 2) As Variant
+' Esta funci贸n obtiene la inversa de la funci贸n de distribuci贸n LogNormal(Mu,Sigma)
+' Si Procedimiento=1 emplea la relaci贸n con la funci贸n Gamma Incompleta Inferior
+' Si Procedimiento=2 emplea la aproximaci贸n de Hastings
+' Llama a la funci贸n F_Normal_MS_Inv
+Dim Eps As Double
+
+Eps = 0.0000001
+
+If Sigma <= 0 Then
+   F_LogNormal_Inv = "Sigma debe ser >0"
+   Exit Function
+End If
+
+If Probabilidad < 0 Or Probabilidad > 1 Then
+   F_LogNormal_Inv = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+If Probabilidad <= Eps Then
+   ' Valor negativo
+   F_LogNormal_Inv = 0
+   Exit Function
+End If
+
+If Abs(Probabilidad - 1) < Eps Then
+   F_LogNormal_Inv = ChrW(8734)
+   Exit Function
+End If
+
+F_LogNormal_Inv = Exp(F_Normal_MS_Inv(Probabilidad, Mu, Sigma, Procedimiento))
+
+End Function
+
+
