@@ -1,5 +1,27 @@
 
-' FUNCI覰 DE PROBABILIDAD
-Public Function p_Delta_Discreta(x As Double, a As Double) As Double' Funci髇 de probabilidad de la distribuci髇 Delta de Dirac discreta' a es el punto donde se concentra la masa probabil韘ticap_Delta_Discreta = 0If x = a Then    p_Delta_Discreta = 1End IfEnd Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Delta_Discreta(x As Double, a As Double) As Double' Funci髇 de distribuci髇 de la distribuci髇 Delta de Dirac discretaIf x < a Then    F_Delta_Discreta = 0Else    F_Delta_Discreta = 1End IfEnd Function
+' FUNCI脫N DE PROBABILIDAD
+
+Public Function p_Delta_Discreta(x As Double, a As Double) As Double
+' Funci贸n de probabilidad de la distribuci贸n Delta de Dirac discreta
+' a es el punto donde se concentra la masa probabil铆stica
+p_Delta_Discreta = 0
+If x = a Then
+    p_Delta_Discreta = 1
+End If
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Delta_Discreta(x As Double, a As Double) As Double
+' Funci贸n de distribuci贸n de la distribuci贸n Delta de Dirac discreta
+
+If x < a Then
+    F_Delta_Discreta = 0
+Else
+    F_Delta_Discreta = 1
+End If
+
+End Function
+
+
