@@ -1,3 +1,16 @@
 
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Delta_Continua(x As Double, a As Double) As Double' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇' Delta de Dirac continuaIf x < a Then    FD_Delta_Continua = 0Else    FD_Delta_Continua = 1End IfEnd Function
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Delta_Continua(x As Double, a As Double) As Double
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n
+' Delta de Dirac continua
+
+If x < a Then
+    FD_Delta_Continua = 0
+Else
+    FD_Delta_Continua = 1
+End If
+
+End Function
+
+
