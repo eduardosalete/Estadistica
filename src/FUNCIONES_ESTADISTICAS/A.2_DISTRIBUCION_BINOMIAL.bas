@@ -1,5 +1,79 @@
 
-' FUNCI覰 DE PROBABILIDAD
-Public Function p_Binomial(x As Long, N As Long, p As Double) As Variant' Funci髇 de probabilidad de la distribuci髇 Binomial' N es el n鷐ero total de pruebas' x el n鷐ero total de aciertos' p la probabilidad de acertar en un ensayo' Llama a la funci髇 N_CombinatorioDim q As Double, Eps As DoubleEps = 0.0000001If p < 0 Or p > 1 Then   p_Binomial = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfIf x < 0 Or x > N Then   p_Binomial = 0   Exit FunctionEnd IfIf p < Eps Then   p_Binomial = 0   Exit FunctionEnd Ifq = 1 - pp_Binomial = N_Combinatorio(N, x) * p ^ x * q ^ (N - x)End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Binomial(x As Double, N As Long, p As Double) As Variant' Funci髇 de distribuci髇 de la distribuci髇 Binomial P(Psi<=x)' Llama a la funci髇 p_BinomialDim i As Long, ix As LongDim Eps As DoubleEps = 0.0000001If p < 0 Or p > 1 Then   F_Binomial = "La probabilidad debe estar entre 0 y 1"   Exit FunctionEnd IfIf x < 0 Then   F_Binomial = 0   Exit FunctionEnd IfIf x >= N Then   F_Binomial = 1   Exit FunctionEnd IfIf p < Eps Then   F_Binomial = 0   Exit FunctionEnd IfIf p > 1 Then   F_Binomial = -1   Exit FunctionEnd Ifix = Fix(x)F_Binomial = 0For i = 0 To ix    F_Binomial = F_Binomial + p_Binomial(i, N, p)Next iEnd Function
+' FUNCI脫N DE PROBABILIDAD
+
+Public Function p_Binomial(x As Long, N As Long, p As Double) As Variant
+' Funci贸n de probabilidad de la distribuci贸n Binomial
+' N es el n煤mero total de pruebas
+' x el n煤mero total de aciertos
+' p la probabilidad de acertar en un ensayo
+' Llama a la funci贸n N_Combinatorio
+
+Dim q As Double, Eps As Double
+
+Eps = 0.0000001
+
+If p < 0 Or p > 1 Then
+   p_Binomial = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+If x < 0 Or x > N Then
+   p_Binomial = 0
+   Exit Function
+End If
+
+If p < Eps Then
+   p_Binomial = 0
+   Exit Function
+End If
+
+q = 1 - p
+p_Binomial = N_Combinatorio(N, x) * p ^ x * q ^ (N - x)
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Binomial(x As Double, N As Long, p As Double) As Variant
+' Funci贸n de distribuci贸n de la distribuci贸n Binomial P(Psi<=x)
+' Llama a la funci贸n p_Binomial
+Dim i As Long, ix As Long
+Dim Eps As Double
+
+Eps = 0.0000001
+
+If p < 0 Or p > 1 Then
+   F_Binomial = "La probabilidad debe estar entre 0 y 1"
+   Exit Function
+End If
+
+If x < 0 Then
+   F_Binomial = 0
+   Exit Function
+End If
+
+If x >= N Then
+   F_Binomial = 1
+   Exit Function
+End If
+
+If p < Eps Then
+   F_Binomial = 0
+   Exit Function
+End If
+
+If p > 1 Then
+   F_Binomial = -1
+   Exit Function
+End If
+
+ix = Fix(x)
+F_Binomial = 0
+For i = 0 To ix
+    F_Binomial = F_Binomial + p_Binomial(i, N, p)
+Next i
+
+End Function
+
+
