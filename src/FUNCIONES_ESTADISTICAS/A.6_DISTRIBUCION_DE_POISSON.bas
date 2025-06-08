@@ -1,5 +1,68 @@
 
-' FUNCI覰 DE PROBABILIDAD
-Public Function p_Poisson(x As Long, Lambda As Double) As Variant' Funci髇 de probabilidad de la distribuci髇 de Poisson' x el n鷐ero total de ocurrencias' Lambda es el par醡etro de la distribuci髇' Llama a la funci髇 Mi_FactorialDim q As Double, Eps As DoubleEps = 0.0000001If Lambda <= 0 Then   p_Poisson = "Lambda debe ser >0"   Exit FunctionEnd IfIf x < 0 Then   p_Poisson = 0   Exit FunctionEnd IfIf Lambda < Eps Then   p_Poisson = 0   Exit FunctionEnd Ifp_Poisson = Exp(-Lambda) * Lambda ^ x / Mi_Factorial(x)End Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Poisson(x As Double, Lambda As Double) As Variant' Funci髇 de distribuci髇 de la distribuci髇 de Poisson P(Psi<=x)' Llama a la funci髇 p_PoissonDim i As Long, ix As LongDim Eps As DoubleEps = 0.0000001If Lambda <= 0 Then   p_Poisson = "Lambda debe ser >0"   Exit FunctionEnd IfIf x < 0 Then   F_Poisson = 0   Exit FunctionEnd IfIf Lambda < Eps Then   F_Poisson = 0   Exit FunctionEnd Ifix = Fix(x)F_Poisson = 0For i = 0 To ix    F_Poisson = F_Poisson + p_Poisson(i, Lambda)Next iEnd Function
+' FUNCI脫N DE PROBABILIDAD
+
+Public Function p_Poisson(x As Long, Lambda As Double) As Variant
+' Funci贸n de probabilidad de la distribuci贸n de Poisson
+' x el n煤mero total de ocurrencias
+' Lambda es el par谩metro de la distribuci贸n
+' Llama a la funci贸n Mi_Factorial
+
+Dim q As Double, Eps As Double
+
+Eps = 0.0000001
+
+If Lambda <= 0 Then
+   p_Poisson = "Lambda debe ser >0"
+   Exit Function
+End If
+
+If x < 0 Then
+   p_Poisson = 0
+   Exit Function
+End If
+
+If Lambda < Eps Then
+   p_Poisson = 0
+   Exit Function
+End If
+
+p_Poisson = Exp(-Lambda) * Lambda ^ x / Mi_Factorial(x)
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Poisson(x As Double, Lambda As Double) As Variant
+' Funci贸n de distribuci贸n de la distribuci贸n de Poisson P(Psi<=x)
+' Llama a la funci贸n p_Poisson
+
+Dim i As Long, ix As Long
+Dim Eps As Double
+
+Eps = 0.0000001
+
+If Lambda <= 0 Then
+   p_Poisson = "Lambda debe ser >0"
+   Exit Function
+End If
+
+If x < 0 Then
+   F_Poisson = 0
+   Exit Function
+End If
+
+If Lambda < Eps Then
+   F_Poisson = 0
+   Exit Function
+End If
+
+ix = Fix(x)
+F_Poisson = 0
+For i = 0 To ix
+    F_Poisson = F_Poisson + p_Poisson(i, Lambda)
+Next i
+
+End Function
+
+
