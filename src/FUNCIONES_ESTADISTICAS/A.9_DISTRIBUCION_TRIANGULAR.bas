@@ -1,7 +1,126 @@
 
-' FUNCI覰 DE DENSIDAD
-Public Function D_Triangular(x As Double, a As Double, b As Double, c As Double) As Variant' Esta funci髇 calcula la funci髇 de densidad de la distribuci髇 Triangular' a valor inferior, b valor superior, c modaDim Denominador1 As Double, Denominador2 As DoubleIf b <= a Then   D_Triangular = "Los par醡etros deben ser a < b"   Exit FunctionEnd IfIf c < a Or c > b Then   D_Triangular = "Los par醡etros deben ser a <= c <= b"   Exit FunctionEnd IfIf x <= a Or x >= b Then   ' La funci髇 es nula fuera del intervalo (a, b)   D_Triangular = 0   Exit FunctionEnd IfIf x <= c Then   ' Estamos en la rama ascendente   Denominador1 = (b - a) * (c - a)   D_Triangular = 2 * (x - a) / Denominador1Else   ' Estamos en la rama descendente   Denominador2 = (b - a) * (b - c)   D_Triangular = 2 * (b - x) / Denominador2End IfEnd Function
-' FUNCI覰 DE DISTRIBUCI覰
-Public Function FD_Triangular(x As Double, a As Double, b As Double, c As Double) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 Triangular' a valor inferior, b valor superior, c modaDim Denominador1 As Double, Denominador2 As DoubleIf b <= a Then   FD_Triangular = "Los par醡etros deben ser a < b"   Exit FunctionEnd IfIf c < a Or c > b Then   FD_Triangular = "Los par醡etros deben ser a <= c <= b"   Exit FunctionEnd IfIf x <= a Then   ' La funci髇 es nula   FD_Triangular = 0   Exit FunctionEnd IfIf x >= b Then   ' La funci髇 vale la unidad   FD_Triangular = 1   Exit FunctionEnd IfIf x <= c Then   ' Estamos en la rama ascendente   Denominador1 = (b - a) * (c - a)   FD_Triangular = (x - a) ^ 2 / Denominador1Else   ' Estamos en la rama descendente   Denominador2 = (b - a) * (b - c)   FD_Triangular = 1 - (b - x) ^ 2 / Denominador2End IfEnd Function
-' INVERSA DE LA FUNCI覰 DE DISTRIBUCI覰
-Public Function F_Triangular_Inv(Probabilidad As Double, a As Double, b As Double, c As Double) As Variant' Esta funci髇 calcula la funci髇 de distribuci髇 de la distribuci髇 Triangular' a valor inferior, b valor superior, c modaDim Denominador1 As Double, Denominador2 As Double, Eps As DoubleDim ProbModa As DoubleEps = 0.0000001If b <= a Then   F_Triangular_Inv = "Los par醡etros deben ser a < b"   Exit FunctionEnd IfIf c < a Or c > b Then   F_Triangular_Inv = "Los par醡etros deben ser a <= c <= b"   Exit FunctionEnd IfProbModa = 1 / (b - a) * (c - a) ' Masa total asociada a la modaIf Probabilidad <= Eps Then   F_Triangular_Inv = a   Exit FunctionEnd IfIf Abs(Probabilidad - 1) <= Eps Then   F_Triangular_Inv = b   Exit FunctionEnd IfIf Probabilidad >= 1 Then   F_Triangular_Inv = ChrW(8734)   Exit FunctionEnd IfIf Probabilidad <= ProbModa Then   ' Estamos en la rama ascendente   Denominador1 = (b - a) * (c - a)   F_Triangular_Inv = a + Sqr(Probabilidad * Denominador1)Else   ' Estamos en la rama descendente   Denominador2 = (b - a) * (b - c)   F_Triangular_Inv = b - Sqr((1 - Probabilidad) * Denominador2)End IfEnd Function
+' FUNCI脫N DE DENSIDAD
+
+Public Function D_Triangular(x As Double, a As Double, b As Double, c As Double) As Variant
+' Esta funci贸n calcula la funci贸n de densidad de la distribuci贸n Triangular
+' a valor inferior, b valor superior, c moda
+Dim Denominador1 As Double, Denominador2 As Double
+
+If b <= a Then
+   D_Triangular = "Los par谩metros deben ser a < b"
+   Exit Function
+End If
+If c < a Or c > b Then
+   D_Triangular = "Los par谩metros deben ser a <= c <= b"
+   Exit Function
+End If
+
+If x <= a Or x >= b Then
+   ' La funci贸n es nula fuera del intervalo (a, b)
+   D_Triangular = 0
+   Exit Function
+End If
+
+If x <= c Then
+   ' Estamos en la rama ascendente
+   Denominador1 = (b - a) * (c - a)
+   D_Triangular = 2 * (x - a) / Denominador1
+Else
+   ' Estamos en la rama descendente
+   Denominador2 = (b - a) * (b - c)
+   D_Triangular = 2 * (b - x) / Denominador2
+End If
+
+End Function
+
+
+' FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function FD_Triangular(x As Double, a As Double, b As Double, c As Double) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n Triangular
+' a valor inferior, b valor superior, c moda
+Dim Denominador1 As Double, Denominador2 As Double
+
+If b <= a Then
+   FD_Triangular = "Los par谩metros deben ser a < b"
+   Exit Function
+End If
+If c < a Or c > b Then
+   FD_Triangular = "Los par谩metros deben ser a <= c <= b"
+   Exit Function
+End If
+
+If x <= a Then
+   ' La funci贸n es nula
+   FD_Triangular = 0
+   Exit Function
+End If
+
+If x >= b Then
+   ' La funci贸n vale la unidad
+   FD_Triangular = 1
+   Exit Function
+End If
+
+If x <= c Then
+   ' Estamos en la rama ascendente
+   Denominador1 = (b - a) * (c - a)
+   FD_Triangular = (x - a) ^ 2 / Denominador1
+Else
+   ' Estamos en la rama descendente
+   Denominador2 = (b - a) * (b - c)
+   FD_Triangular = 1 - (b - x) ^ 2 / Denominador2
+End If
+
+End Function
+
+
+' INVERSA DE LA FUNCI脫N DE DISTRIBUCI脫N
+
+Public Function F_Triangular_Inv(Probabilidad As Double, a As Double, b As Double, c As Double) As Variant
+' Esta funci贸n calcula la funci贸n de distribuci贸n de la distribuci贸n Triangular
+' a valor inferior, b valor superior, c moda
+Dim Denominador1 As Double, Denominador2 As Double, Eps As Double
+Dim ProbModa As Double
+
+Eps = 0.0000001
+
+If b <= a Then
+   F_Triangular_Inv = "Los par谩metros deben ser a < b"
+   Exit Function
+End If
+If c < a Or c > b Then
+   F_Triangular_Inv = "Los par谩metros deben ser a <= c <= b"
+   Exit Function
+End If
+
+ProbModa = 1 / (b - a) * (c - a) ' Masa total asociada a la moda
+
+If Probabilidad <= Eps Then
+   F_Triangular_Inv = a
+   Exit Function
+End If
+
+If Abs(Probabilidad - 1) <= Eps Then
+   F_Triangular_Inv = b
+   Exit Function
+End If
+
+If Probabilidad >= 1 Then
+   F_Triangular_Inv = ChrW(8734)
+   Exit Function
+End If
+
+If Probabilidad <= ProbModa Then
+   ' Estamos en la rama ascendente
+   Denominador1 = (b - a) * (c - a)
+   F_Triangular_Inv = a + Sqr(Probabilidad * Denominador1)
+Else
+   ' Estamos en la rama descendente
+   Denominador2 = (b - a) * (b - c)
+   F_Triangular_Inv = b - Sqr((1 - Probabilidad) * Denominador2)
+End If
+
+End Function
+
+
