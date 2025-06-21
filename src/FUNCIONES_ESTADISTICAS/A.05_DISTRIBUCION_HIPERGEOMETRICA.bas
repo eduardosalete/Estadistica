@@ -141,7 +141,7 @@ If N_ < N Then
    Exit Function
 End If
 
-Hiperg_M = Fix((N + 1) / (N_ - 1) * (p * N_ + 1))
+Hiperg_M = Fix((N + 1) / (N_ + 2) * (p * N_ + 1))
 
 End Function
 
