@@ -58,12 +58,12 @@ If Probabilidad > 1 Then
 End If
 
 If Probabilidad < Eps Then
-   F_Gumbel_A_Inv = "+" & ChrW(8734)
+   F_Gumbel_A_Inv = "-" & ChrW(8734)
    Exit Function
 End If
 
 If Probabilidad >= 1 - Eps Then
-   F_Gumbel_A_Inv = "-" & ChrW(8734)
+   F_Gumbel_A_Inv = "+" & ChrW(8734)
    Exit Function
 End If
 
@@ -72,5 +72,3 @@ z = Log(-Log(1 - Probabilidad))
 F_Gumbel_A_Inv = Beta * z + Mu
 
 End Function
-
-
